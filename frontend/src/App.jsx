@@ -2,6 +2,7 @@ import { LangProvider, T, useLang } from './lang'
 import { Check, Photo, Plus, Stars } from './components/bits'
 import Carousel from './components/Carousel'
 import Rituals from './components/Rituals'
+import Cloth from './components/Cloth'
 
 const Kasavu = () => <div className="kz-kasavu" aria-hidden="true" />
 
@@ -190,6 +191,7 @@ export default function App() {
   return (
     <LangProvider>
       <div className="kz-page">
+        <Cloth />
         <Kasavu />
         <Header />
         <Carousel />
