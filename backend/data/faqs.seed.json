@@ -1,0 +1,26 @@
+{
+  "faqs": [
+    {"id":"what-is-rooted-in-you","category":"Getting started","status":"published","question":"What is Rooted in You?","answer":"Rooted in You offers Kerala rituals for gentle digestion and for the first forty-two days of motherhood. Everything is made by hand, only when you ask, and every ritual begins with a conversation with a vaidyar."},
+    {"id":"how-does-a-ritual-begin","category":"Getting started","status":"published","question":"How does a ritual begin?","answer":"With a call. You spend fifteen unhurried minutes with a vaidyar, in Malayalam or English. The call costs ₹299, and that amount comes off the price of your ritual."},
+    {"id":"how-is-a-ritual-made","category":"Ordering and delivery","status":"published","question":"How is a ritual made, and when does it arrive?","answer":"Nothing is made until you ask. Day 0: your fifteen-minute call with a vaidyar. Day 1: your herbs are picked at first light. Day 2: they are dried, ground and blended by hand. Day 4: the ritual arrives at your door, with every day counted out and marked with your name and the date."},
+    {"id":"what-are-the-rituals","category":"The rituals","status":"published","question":"What rituals do you offer, and what do they cost?","answer":"There are three. For the gut: twenty-one quiet mornings, ₹1,499. For the new mother: forty-two days of being cared for, ₹5,499 for the full 42 days or ₹2,999 for the Essentials kit. Scents: a set of three alcohol-free attars in small wooden roll-ons, ₹1,499."},
+    {"id":"what-is-the-gut-ritual","category":"The rituals","status":"published","question":"What does the 21-morning ritual for the gut involve?","answer":"A sachet in warm water each morning and a tea after dinner. Each of the twenty-one sachets is marked with its day, so there is nothing else to remember."},
+    {"id":"full-vs-essentials","category":"The rituals","status":"published","question":"What is the difference between the Full 42 days and Essentials kits for new mothers?","answer":"The Full 42 days kit (₹5,499) covers the whole forty-two days after birth. Essentials (₹2,999) is a smaller kit. Your vaidyar plans the ritual with you, so the call is the best place to decide which suits you."},
+    {"id":"reserve-before-birth","category":"Ordering and delivery","status":"published","question":"Can I reserve the new-mother ritual before the baby arrives?","answer":"Yes. You can reserve with ₹499. Nothing is picked until the baby arrives."},
+    {"id":"send-to-someone-far-away","category":"Ordering and delivery","status":"published","question":"Can I send a ritual to someone who lives far away?","answer":"Yes. If you are ordering from far away, the vaidyar speaks with the person receiving it, and the ritual arrives at her door in India."},
+    {"id":"are-the-scents-alcohol-free","category":"The rituals","status":"published","question":"Are the scents alcohol-free?","answer":"Yes. The scents are alcohol-free attars in a small wooden roll-on, in vetiver, sandalwood and jasmine. You choose three to try and keep the one that feels like yours."},
+    {"id":"who-will-i-speak-with","category":"Getting started","status":"published","question":"Who will I speak with on the call?","answer":"A vaidyar with a BAMS degree. Our vaidyars cover care after birth, and digestion and routine."},
+    {"id":"is-this-medical-treatment","category":"Safety and care","status":"published","question":"Is this medical treatment?","answer":"No. These are traditional food and wellness preparations. They are not meant to diagnose, treat, cure or prevent any disease. If you have a medical condition, or are pregnant or nursing, please speak with your doctor as well."},
+
+    {"id":"q-refunds","category":"Ordering and delivery","status":"pending","source":"seed","question":"What is your refund and return policy?"},
+    {"id":"q-shipping-outside-india","category":"Ordering and delivery","status":"pending","source":"seed","question":"Do you ship outside India?"},
+    {"id":"q-delivery-times","category":"Ordering and delivery","status":"pending","source":"seed","question":"How long does delivery take in different parts of India?"},
+    {"id":"q-payment-methods","category":"Ordering and delivery","status":"pending","source":"seed","question":"Which payment methods do you accept?"},
+    {"id":"q-ingredients-allergens","category":"Safety and care","status":"pending","source":"seed","question":"Where can I see the full ingredient list, and are there allergens?"},
+    {"id":"q-pregnancy","category":"Safety and care","status":"pending","source":"seed","question":"Is the digestion ritual suitable during pregnancy or while nursing?"},
+    {"id":"q-storage-shelf-life","category":"The rituals","status":"pending","source":"seed","question":"How should I store the sachets and for how long do they keep?"},
+    {"id":"q-reschedule-call","category":"Getting started","status":"pending","source":"seed","question":"Can I reschedule my call with the vaidyar?"},
+    {"id":"q-call-hours","category":"Getting started","status":"pending","source":"seed","question":"What days and hours are the vaidyars available?"},
+    {"id":"q-fssai","category":"Safety and care","status":"pending","source":"seed","question":"What is your FSSAI licence number?"}
+  ]
+}

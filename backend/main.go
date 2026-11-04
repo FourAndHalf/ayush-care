@@ -9,7 +9,7 @@ import (
 )
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type, Authorization", "application/json")
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(v)
 }
@@ -21,8 +21,8 @@ func cors(next http.Handler) http.Handler {
 	}
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", origin)
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if r.Method == http.MethodOptions {
 			w.WriteHeader(http.StatusNoContent)
 			return
@@ -31,8 +31,9 @@ func cors(next http.Handler) http.Handler {
 	})
 }
 
-func newMux() http.Handler {
+func newMux(api *API) http.Handler {
 	mux := http.NewServeMux()
+	api.routes(mux)
 	mux.HandleFunc("GET /api/health", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"status": "ok",
@@ -50,6 +51,18 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
+	dataFile := os.Getenv("DATA_FILE")
+	if dataFile == "" {
+		dataFile = "data/store.json"
+	}
+	store, err := OpenStore(dataFile, "data/faqs.seed.json")
+	if err != nil {
+		log.Fatalf("open store: %v", err)
+	}
+	api := &API{store: store, adminToken: os.Getenv("ADMIN_TOKEN"), limiter: newLimiter(5, time.Hour)}
+	if api.adminToken == "" {
+		log.Print("ADMIN_TOKEN not set: admin API is disabled")
+	}
 	log.Printf("listening on :%s", port)
-	log.Fatal(http.ListenAndServe(":"+port, newMux()))
+	log.Fatal(http.ListenAndServe(":"+port, newMux(api)))
 }

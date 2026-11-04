@@ -33,6 +33,44 @@ cd frontend && npm install && npm run dev   # http://localhost:5173 (proxies /ap
 
 Backend env: `PORT` (default 8080), `CORS_ORIGIN` (default `http://localhost:5173`).
 
+## FAQ page, backend and AI-crawler support
+
+The `/faq/` page ("Questions, answered.") is backed by the Go API, which stores questions and answers.
+
+**Data flow**
+- Answered questions live in `backend/data/faqs.seed.json` (`status: published`). The same file lists questions that still **need an answer** (`status: pending`) so you have a to-do list.
+- At runtime the backend keeps its own copy in `backend/data/store.json` (git-ignored, created from the seed on first start).
+- Visitors submit questions from the page; they are saved as `pending` and are never shown publicly until you answer them.
+
+**API** (`backend/`)
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| GET | `/api/faqs` | published Q&A + categories (public) |
+| GET | `/api/faqs/{id}` | one published Q&A |
+| POST | `/api/questions` | `{question, name?, email?}`. 10-500 chars, honeypot, 5 per hour per IP |
+| GET | `/api/admin/questions?status=pending` | needs `Authorization: Bearer $ADMIN_TOKEN` |
+| PUT | `/api/admin/faqs/{id}` | `{answer, question?, category?}`: answers a pending question and publishes it |
+| POST | `/api/admin/faqs` | `{category, question, answer}`: add an answered Q&A |
+| DELETE | `/api/admin/faqs/{id}` | remove |
+
+The admin API is off unless `ADMIN_TOKEN` is set. Example:
+
+```bash
+curl -s -H "Authorization: Bearer $ADMIN_TOKEN" "localhost:8080/api/admin/questions?status=pending"
+curl -s -X PUT -H "Authorization: Bearer $ADMIN_TOKEN" -d '{"answer":"Yes, we ship worldwide."}' localhost:8080/api/admin/faqs/q-shipping-outside-india
+```
+
+Backend env: `PORT`, `CORS_ORIGIN`, `ADMIN_TOKEN`, `DATA_FILE` (default `data/store.json`).
+Frontend env: `VITE_API_URL` (where the API lives; empty = same origin / dev proxy). If the API is unreachable the page shows the bundled answers and the ask form reports that it could not reach the server.
+
+**For crawlers (search engines and AI bots)** - `npm run build` also pre-renders `/` and `/faq/` to real HTML, so bots that do not run JavaScript still read the content. It writes:
+- `faq/index.html` with `FAQPage` JSON-LD, canonical and Open Graph tags
+- `robots.txt` (explicitly allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot and others) and `sitemap.xml`
+- `llms.txt` (site summary and every Q&A in Markdown) and `faq.json` (machine-readable)
+
+The published answers are baked in at build time from the seed file. After answering questions via the admin API, copy them into `faqs.seed.json` and redeploy to update the static pages and `llms.txt`.
+
 ## How the frontend was made
 
 The page was implemented from a design mock (an HTML prototype) and ported to React.
