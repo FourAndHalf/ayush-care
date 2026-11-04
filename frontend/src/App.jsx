@@ -46,7 +46,7 @@ function MadeByHand() {
   return (
     <section aria-label="Made by hand" className="kz-hand wrap">
       <figure style={{ margin: 0 }}>
-        <Photo n={4} alt="Hands grinding fresh herbs on a grinding stone, in window light" note="Your photo: hands grinding today's herbs on an ammikkallu. Window light, no studio." />
+        <Photo src="photos/grinding-herbs.webp" alt="Hands grinding fresh herbs on a granite grinding stone, in window light" />
         <figcaption>
           <span><T en="Ground by hand, the morning after your consultation." ml="കൺസൾട്ടേഷന്റെ പിറ്റേന്ന് രാവിലെ, കൈകൊണ്ട് അരച്ചെടുക്കുന്നു." /></span>
           <span lang="ml" style={{ fontFamily: "'Manjari', sans-serif", color: '#8C6B22' }}>കൈകൊണ്ട്</span>

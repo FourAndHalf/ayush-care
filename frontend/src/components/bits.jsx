@@ -10,10 +10,10 @@ export function Stars({ width = 84 }) {
   )
 }
 
-export function Photo({ n, alt, note, className = '', style, children }) {
+export function Photo({ n, src, alt, note, className = '', style, children }) {
   return (
     <div className={`photo ${className}`} style={style}>
-      <img src={`${import.meta.env.BASE_URL}placeholders/p${n}.svg`} alt={alt} loading="lazy" />
+      <img src={`${import.meta.env.BASE_URL}${src || `placeholders/p${n}.svg`}`} alt={alt} loading="lazy" />
       {children}
       {note && <span className="note">{note}</span>}
     </div>
