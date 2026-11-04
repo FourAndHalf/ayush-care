@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { T } from '../lang'
-import { Photo } from './bits'
 
 const slides = [
   { n: 1, href: '#mother', eyebrow: ['For the new mother', 'പുതിയ അമ്മയ്ക്ക്'], title: ['Forty-two days of being cared for.', 'കരുതലിന്റെ നാൽപ്പത്തിരണ്ട് ദിവസങ്ങൾ.'], body: ['Expecting soon? Reserve with ₹499. Nothing is picked until the baby arrives.', 'ഉടൻ പ്രതീക്ഷിക്കുന്നുണ്ടോ? ₹499 കൊണ്ട് ഉറപ്പിക്കാം. കുഞ്ഞ് എത്തുന്നതുവരെ ഒന്നും പറിക്കില്ല.'], cta: ['See the forty-two days', 'നാൽപ്പത്തിരണ്ട് ദിവസങ്ങൾ കാണാം'], alt: "Week one's dated packets of kanji mix and a bottle of oil, on wood", note: "Your photo: week one's dated packets and the oil, on wood" },
@@ -28,7 +27,7 @@ export default function Carousel() {
 
   return (
     <section
-      className="kz-hero wrap"
+      className="kz-hero"
       aria-roledescription="carousel"
       aria-label="Featured rituals"
       onMouseEnter={() => setHover(true)}
@@ -36,40 +35,40 @@ export default function Carousel() {
       onFocus={() => setHover(true)}
       onBlur={() => setHover(false)}
     >
-      <div className="kz-slides">
-        {slides.map((s, idx) => (
-          <div key={idx} className={`kz-slide${idx === i ? ' on' : ''}`} role="group" aria-roledescription="slide" aria-label={`${idx + 1} of ${count}`} aria-hidden={idx !== i}>
-            <div className="kz-stext">
-              <p className="eyebrow"><T en={s.eyebrow[0]} ml={s.eyebrow[1]} /></p>
-              <h2 className="serif"><T en={s.title[0]} ml={s.title[1]} /></h2>
-              <p className="lede"><T en={s.body[0]} ml={s.body[1]} /></p>
-              <a className="btn" href={s.href} tabIndex={idx === i ? 0 : -1}><T en={s.cta[0]} ml={s.cta[1]} /></a>
-              <div className="kz-ctrls">
-                <button type="button" className="kz-ctl" aria-label="Previous banner" onClick={() => go(i - 1)}>
-                  <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="#1F1D1A" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M7.5 1.5L1.5 7.5l6 6" /></svg>
-                </button>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-                  {slides.map((_, d) => (
-                    <button type="button" key={d} className="kz-dotl" aria-label={`Show banner ${d + 1} of ${count}`} aria-current={d === i} onClick={() => go(d)}>
-                      <i className={d === i ? 'kz-cur' : ''} />
-                    </button>
-                  ))}
-                </span>
-                <button type="button" className="kz-ctl" aria-label="Next banner" onClick={() => go(i + 1)}>
-                  <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="#1F1D1A" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 1.5l6 6-6 6" /></svg>
-                </button>
-                <button type="button" className="kz-ctl kz-pausel" aria-label="Pause or play the banner" aria-pressed={paused} onClick={() => setPaused((p) => !p)}>
-                  {paused ? (
-                    <svg aria-hidden="true" width="12" height="14" viewBox="0 0 12 14" fill="#1F1D1A"><path d="M1.5 0.8l9.5 6.2-9.5 6.2z" /></svg>
-                  ) : (
-                    <svg aria-hidden="true" width="12" height="14" viewBox="0 0 12 14" fill="#1F1D1A"><rect x="1" width="3.2" height="14" rx="1" /><rect x="7.8" width="3.2" height="14" rx="1" /></svg>
-                  )}
-                </button>
-              </div>
-            </div>
-            <Photo className="kz-sphoto" n={s.n} alt={s.alt} note={s.note} />
+      {slides.map((s, idx) => (
+        <div key={idx} className={`kz-slide${idx === i ? ' on' : ''}`} role="group" aria-roledescription="slide" aria-label={`${idx + 1} of ${count}`} aria-hidden={idx !== i}>
+          <img className="kz-bg" src={`${import.meta.env.BASE_URL}placeholders/p${s.n}.svg`} alt={s.alt} />
+          <div className="kz-scrim" />
+          <div className="kz-stext wrap">
+            <p className="eyebrow"><T en={s.eyebrow[0]} ml={s.eyebrow[1]} /></p>
+            <h2 className="serif"><T en={s.title[0]} ml={s.title[1]} /></h2>
+            <p className="lede"><T en={s.body[0]} ml={s.body[1]} /></p>
+            <a className="kz-hero-btn" href={s.href} tabIndex={idx === i ? 0 : -1}><T en={s.cta[0]} ml={s.cta[1]} /></a>
           </div>
+          <span className="note kz-bgnote">{s.note}</span>
+        </div>
+      ))}
+
+      <button type="button" className="kz-arrow kz-prev" aria-label="Previous banner" onClick={() => go(i - 1)}>
+        <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M7.5 1.5L1.5 7.5l6 6" /></svg>
+      </button>
+      <button type="button" className="kz-arrow kz-next" aria-label="Next banner" onClick={() => go(i + 1)}>
+        <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 1.5l6 6-6 6" /></svg>
+      </button>
+
+      <div className="kz-ctrls">
+        {slides.map((_, d) => (
+          <button type="button" key={d} className="kz-dotl" aria-label={`Show banner ${d + 1} of ${count}`} aria-current={d === i} onClick={() => go(d)}>
+            <i className={d === i ? 'kz-cur' : ''} />
+          </button>
         ))}
+        <button type="button" className="kz-pausel" aria-label="Pause or play the banner" aria-pressed={paused} onClick={() => setPaused((p) => !p)}>
+          {paused ? (
+            <svg aria-hidden="true" width="10" height="12" viewBox="0 0 12 14" fill="currentColor"><path d="M1.5 0.8l9.5 6.2-9.5 6.2z" /></svg>
+          ) : (
+            <svg aria-hidden="true" width="10" height="12" viewBox="0 0 12 14" fill="currentColor"><rect x="1" width="3.2" height="14" rx="1" /><rect x="7.8" width="3.2" height="14" rx="1" /></svg>
+          )}
+        </button>
       </div>
     </section>
   )
