@@ -1,1 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="#F5F1E8"/><path d="M0 0h8M0 4h8" stroke="#E9E2D0" stroke-width=".6"/><path d="M0 0v8M4 0v8" stroke="#EDE6D4" stroke-width=".4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <filter id="cloth" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .22 -.04" result="grainTint"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="3" stitchTiles="stitch" result="mottle"/>
+      <feColorMatrix in="mottle" type="matrix" values="0 0 0 0 .55  0 0 0 0 .46  0 0 0 0 .28  0 0 0 .20 -.04" result="mottleTint"/>
+      <feMerge><feMergeNode in="mottleTint"/><feMergeNode in="grainTint"/></feMerge>
+    </filter>
+    <filter id="wavy" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <linearGradient id="thread" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9A24A" stop-opacity=".42"/>
+      <stop offset=".5" stop-color="#E3C77C" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#C9A24A" stop-opacity=".42"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" fill="#F4EFE2"/>
+  <rect width="300" height="300" filter="url(#cloth)"/>
+  <g filter="url(#wavy)" fill="none" stroke="url(#thread)" stroke-linecap="round">
+    <g stroke-width="1.6">
+      <path d="M50 -20V320M150 -20V320M250 -20V320"/>
+      <path d="M-20 50H320M-20 150H320M-20 250H320"/>
+    </g>
+    <g stroke-width=".7" stroke-opacity=".6">
+      <path d="M54 -20V320M154 -20V320M254 -20V320"/>
+      <path d="M-20 54H320M-20 154H320M-20 254H320"/>
+    </g>
+  </g>
+</svg>

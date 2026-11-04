@@ -1,1 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="96" height="48" viewBox="0 0 96 48"><rect width="96" height="48" fill="#F5EFE0"/><rect y="6" width="96" height="3" fill="#B8913A"/><rect y="12" width="96" height="1" fill="#D9BC6E"/><path d="M0 24l12-7 12 7-12 7zM48 24l12-7 12 7-12 7z" fill="#B8913A"/><path d="M24 24l12-7 12 7-12 7zM72 24l12-7 12 7-12 7z" fill="#D9BC6E"/><rect y="35" width="96" height="1" fill="#D9BC6E"/><rect y="39" width="96" height="3" fill="#B8913A"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="48" viewBox="0 0 600 48" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="band" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8A6418"/><stop offset=".18" stop-color="#E9CE7E"/>
+      <stop offset=".35" stop-color="#B8913A"/><stop offset=".5" stop-color="#F3E1A0"/>
+      <stop offset=".7" stop-color="#C39A3C"/><stop offset=".88" stop-color="#E4C677"/>
+      <stop offset="1" stop-color="#8A6418"/>
+    </linearGradient>
+    <filter id="streak" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004 0.9" numOctaves="2" seed="5" stitchTiles="stitch" result="s"/>
+      <feColorMatrix in="s" type="matrix" values="0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .7  0 0 0 .9 -.35" result="hi"/>
+      <feComposite in="hi" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="wave" x="0" y="-20%" width="100%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.05" numOctaves="2" seed="9" stitchTiles="stitch" result="n0"/>
+      <feColorMatrix in="n0" type="matrix" values="0 0 0 0 .5  0 1 0 0 0  0 0 0 0 0  0 0 0 0 1" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <rect width="600" height="48" fill="#F4EFE2"/>
+  <g filter="url(#wave)">
+    <rect y="3" width="600" height="2" fill="#9C7620"/>
+    <rect y="6" width="600" height="1" fill="#E7CB7A"/>
+    <rect y="9" width="600" height="19" fill="url(#band)"/>
+    <rect y="9" width="600" height="19" fill="#fff" filter="url(#streak)" opacity=".55"/>
+    <rect y="30" width="600" height="1.5" fill="#B8913A"/>
+    <rect y="33" width="600" height="1" fill="#E7CB7A"/>
+    <rect y="37" width="600" height="2" fill="#9C7620"/>
+    <rect y="41" width="600" height="1" fill="#D9BC6E"/>
+  </g>
+</svg>
