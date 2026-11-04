@@ -10,7 +10,7 @@ Kerala wellness rituals storefront. React frontend, Go backend, in separate fold
 
 [Full page screenshot](docs/home-full.png)
 
-**Live demo:** https://fourandhalf.github.io/ayush-care/ — available once the Pages workflow has run on `main` (see [Publishing](#publishing-the-frontend)).
+**Live demo:** https://fourandhalf.github.io/ayush-care/
 
 ## Repo layout
 
@@ -33,14 +33,14 @@ cd frontend && npm install && npm run dev   # http://localhost:5173 (proxies /ap
 
 Backend env: `PORT` (default 8080), `CORS_ORIGIN` (default `http://localhost:5173`).
 
-## FAQ page, backend and AI-crawler support
+## Questions section, backend and AI-crawler support
 
-The `/faq/` page ("Questions, answered.") is backed by the Go API, which stores questions and answers.
+The "Questions, answered." section is the last block of the home page (anchor `#questions`, just above the footer bar). It is backed by the Go API, which stores questions and answers. The old `/faq/` address redirects to it.
 
 **Data flow**
 - Answered questions live in `backend/data/faqs.seed.json` (`status: published`). The same file lists questions that still **need an answer** (`status: pending`) so you have a to-do list.
 - At runtime the backend keeps its own copy in `backend/data/store.json` (git-ignored, created from the seed on first start).
-- Visitors submit questions from the page; they are saved as `pending` and are never shown publicly until you answer them.
+- Visitors submit questions from the section; they are saved as `pending` and are never shown publicly until you answer them.
 
 **API** (`backend/`)
 
@@ -64,8 +64,8 @@ curl -s -X PUT -H "Authorization: Bearer $ADMIN_TOKEN" -d '{"answer":"Yes, we sh
 Backend env: `PORT`, `CORS_ORIGIN`, `ADMIN_TOKEN`, `DATA_FILE` (default `data/store.json`).
 Frontend env: `VITE_API_URL` (where the API lives; empty = same origin / dev proxy). If the API is unreachable the page shows the bundled answers and the ask form reports that it could not reach the server.
 
-**For crawlers (search engines and AI bots)** - `npm run build` also pre-renders `/` and `/faq/` to real HTML, so bots that do not run JavaScript still read the content. It writes:
-- `faq/index.html` with `FAQPage` JSON-LD, canonical and Open Graph tags
+**For crawlers (search engines and AI bots)** - `npm run build` also pre-renders the home page (questions included) to real HTML, so bots that do not run JavaScript still read the content. It writes:
+- `index.html` with `FAQPage` JSON-LD, canonical and Open Graph tags, and a `faq/index.html` redirect to `/#questions`
 - `robots.txt` (explicitly allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot and others) and `sitemap.xml`
 - `llms.txt` (site summary and every Q&A in Markdown) and `faq.json` (machine-readable)
 
