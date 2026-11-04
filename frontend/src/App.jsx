@@ -4,6 +4,7 @@ import Carousel from './components/Carousel'
 import Rituals from './components/Rituals'
 import Cloth from './components/Cloth'
 import FaqSection from './components/Faq'
+import About from './components/About'
 
 export const BASE = import.meta.env.BASE_URL
 
@@ -17,6 +18,7 @@ export function Header() {
       <nav className="kz-nav" aria-label="Main">
         <a href={`${BASE}#rituals`} className="kz-hide-sm"><T en="Rituals" ml="ചര്യകൾ" /></a>
         <a href={`${BASE}#made`} className="kz-hide-sm"><T en="How it's made" ml="തയ്യാറാക്കുന്ന വിധം" /></a>
+        <a href={`${BASE}#about`} className="kz-hide-sm"><T en="About" ml="ഞങ്ങളെക്കുറിച്ച്" /></a>
         <a href={`${BASE}#questions`} className="kz-hide-sm"><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
         <div className="kz-lang" role="radiogroup" aria-label="Language">
           <button type="button" role="radio" aria-checked={lang === 'en'} onClick={() => setLang('en')}>EN</button>
@@ -181,6 +183,7 @@ export function Footer() {
         <span><T en="Kerala, since 2026" ml="കേരളം, 2026 മുതൽ" /></span>
       </span>
       <span className="links">
+        <a href={`${BASE}#about`}><T en="About" ml="ഞങ്ങളെക്കുറിച്ച്" /></a>
         <a href={`${BASE}#questions`}><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
         <a href="#top">WhatsApp</a>
         <a href="#top">care@[domain]</a>
@@ -206,6 +209,7 @@ export default function App() {
         <Statement />
         <Words />
         <Vaidyar />
+        <About />
         <Close />
         <FaqSection />
         <Footer />
