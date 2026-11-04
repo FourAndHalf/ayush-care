@@ -90,7 +90,7 @@ writeFileSync(
 
 writeFileSync(
   join(dist, 'llms.txt'),
-  `# Rooted in You\n\n> ${DESC_HOME} Every ritual begins with a fifteen-minute call with a vaidyar (Ayurvedic practitioner), in Malayalam or English.\n\n## Pages\n\n- [Home](${SITE}/): the three rituals (for the gut, for the new mother, scents), prices and how a ritual is made\n- [Questions, answered](${SITE}/#questions): the FAQ section at the bottom of the home page\n- [FAQ as JSON](${SITE}/faq.json): the same questions and answers, machine-readable\n\n## Questions and answers\n\n` +
+  `# Rooted in You\n\n> ${DESC_HOME} Every ritual begins with a fifteen-minute call with a vaidyar (Ayurvedic practitioner), in Malayalam or English.\n\n## Pages\n\n- [Home](${SITE}/): the three rituals (for the gut, for the new mother, scents), prices and how a ritual is made\n- [Questions, answered](${SITE}/#questions): the FAQ section at the bottom of the home page\n- [FAQ as JSON](${SITE}/faq.json): the same questions and answers, machine-readable\n\n## About\n\nRooted in You is a two-person startup. One founder comes from a vaidyar family in Malabar. Every ritual is curated from the instructions of a practising vaidyar after the customer's call; there is no ready-made box. The company is small on purpose and does not promise cures.\n\n## Questions and answers\n\n` +
     faqs.map((f) => `### ${f.question}\n\n${f.answer}\n`).join('\n') +
     `\n## Notes\n\nThese are traditional food and wellness preparations, not meant to diagnose, treat, cure or prevent any disease.\n`,
 )
