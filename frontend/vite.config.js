@@ -6,6 +6,7 @@ export default defineConfig({
   base: process.env.VITE_BASE || '/',
   plugins: [react()],
   server: {
+    fs: { allow: ['..'] },
     proxy: {
       '/api': process.env.VITE_API_TARGET || 'http://localhost:8080',
     },

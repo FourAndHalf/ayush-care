@@ -2,3 +2,6 @@ node_modules/
 dist/
 backend/bin/
 .env
+data/store.json
+data/store.json.tmp
+dist-ssr/
