@@ -49,19 +49,18 @@ export default function Carousel() {
         </div>
       ))}
 
-      <button type="button" className="kz-arrow kz-prev" aria-label="Previous banner" onClick={() => go(i - 1)}>
-        <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M7.5 1.5L1.5 7.5l6 6" /></svg>
-      </button>
       <button type="button" className="kz-arrow kz-next" aria-label="Next banner" onClick={() => go(i + 1)}>
         <svg aria-hidden="true" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 1.5l6 6-6 6" /></svg>
       </button>
 
       <div className="kz-ctrls">
-        {slides.map((_, d) => (
-          <button type="button" key={d} className="kz-dotl" aria-label={`Show banner ${d + 1} of ${count}`} aria-current={d === i} onClick={() => go(d)}>
-            <i className={d === i ? 'kz-cur' : ''} />
-          </button>
-        ))}
+        <span className="kz-dots" role="img" aria-label={`Banner ${i + 1} of ${count}`}>
+          {slides.map((_, d) => (
+            <span key={d} className="kz-dotl" aria-hidden="true">
+              <i className={d === i ? 'kz-cur' : ''} />
+            </span>
+          ))}
+        </span>
         <button type="button" className="kz-pausel" aria-label="Pause or play the banner" aria-pressed={paused} onClick={() => setPaused((p) => !p)}>
           {paused ? (
             <svg aria-hidden="true" width="10" height="12" viewBox="0 0 12 14" fill="currentColor"><path d="M1.5 0.8l9.5 6.2-9.5 6.2z" /></svg>

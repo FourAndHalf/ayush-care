@@ -69,9 +69,10 @@ a.kz-cta:hover{background:var(--ink);color:var(--paper)}
 .kz-bgnote{left:auto;right:clamp(16px,2vw,28px);bottom:56px;max-width:min(380px,60vw)}
 .kz-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,253,248,.92);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .4s ease,transform .4s ease;z-index:2}
 .kz-arrow:hover{background:#fff}
-.kz-prev{left:clamp(12px,1.6vw,24px)}.kz-next{right:clamp(12px,1.6vw,24px)}
+.kz-next{right:clamp(12px,1.6vw,24px)}
 .kz-ctrls{position:absolute;left:0;right:0;bottom:12px;display:flex;align-items:center;justify-content:center;gap:2px;z-index:2}
-.kz-dotl{display:inline-flex;align-items:center;justify-content:center;width:26px;height:44px;cursor:pointer;border:0;background:none;padding:0}
+.kz-dots{display:inline-flex;align-items:center}
+.kz-dotl{display:inline-flex;align-items:center;justify-content:center;width:26px;height:44px}
 .kz-dotl i{display:block;width:10px;height:10px;border-radius:50%;border:1px solid #FFFDF8;transition:background .5s ease,transform .5s ease}
 .kz-dotl i.kz-cur{background:#FFFDF8;transform:scale(1.1)}
 .kz-pausel{margin-left:10px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,.7);background:rgba(20,18,14,.25);color:#FFFDF8;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
