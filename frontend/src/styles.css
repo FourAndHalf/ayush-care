@@ -11,16 +11,24 @@ details .kz-plus{transition:transform .7s cubic-bezier(.2,.7,.1,1)}
 details[open] .kz-plus{transform:rotate(45deg)}
 
 .kz-page{background:
-  /* soft light & shadow folds of the cloth, fixed so they drift as you scroll */
-  linear-gradient(112deg,rgba(110,90,50,0) 0%,rgba(110,90,50,.07) 14%,rgba(110,90,50,0) 26%,rgba(255,255,255,.38) 40%,rgba(255,255,255,0) 52%,rgba(110,90,50,.06) 66%,rgba(110,90,50,0) 78%,rgba(255,255,255,.25) 90%,rgba(255,255,255,0) 100%) fixed,
-  radial-gradient(120% 70% at 85% 0%,rgba(255,255,255,.35),rgba(255,255,255,0) 60%) fixed,
-  url(/placeholders/weave.svg) left top/300px 300px repeat,#F4EFE2;color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.7;min-width:0}
+  /* soft vignette */
+  radial-gradient(140% 100% at 50% 40%,rgba(255,255,255,0) 55%,rgba(90,70,35,.16) 100%) fixed,
+  /* draped folds: bright ridge + soft shadow, uneven widths */
+  radial-gradient(38% 120% at 18% 30%,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 70%) fixed,
+  radial-gradient(22% 110% at 33% 40%,rgba(95,75,40,.15) 0%,rgba(95,75,40,0) 72%) fixed,
+  radial-gradient(30% 130% at 58% 55%,rgba(255,255,255,.30) 0%,rgba(255,255,255,0) 70%) fixed,
+  radial-gradient(18% 120% at 72% 45%,rgba(95,75,40,.13) 0%,rgba(95,75,40,0) 72%) fixed,
+  radial-gradient(26% 120% at 92% 35%,rgba(255,255,255,.26) 0%,rgba(255,255,255,0) 70%) fixed,
+  url(/placeholders/weave.svg) left top/400px 350px repeat,#EEE8D8;
+  color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.7;min-width:0}
 .serif{font-family:'Instrument Serif',serif}
 .ml{font-family:'Manjari',sans-serif;font-style:normal;letter-spacing:0}
 .serif .ml{font-weight:400;font-size:max(.62em,16px);line-height:1.35;display:inline-block}
 
-.kz-kasavu{position:relative;overflow:hidden;height:48px;background:url(/placeholders/kasavu.svg) repeat-x left center/600px 100%}
-.kz-kasavu::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,247,222,.85),transparent) no-repeat;background-size:28% 100%;background-position:-40% 0;-webkit-mask:url(/placeholders/kasavu.svg) repeat-x left center/600px 100%;mask:url(/placeholders/kasavu.svg) repeat-x left center/600px 100%;animation:kz-sheen 11s ease-in-out infinite 1.5s}
+.kz-kasavu{position:relative;overflow:hidden;height:48px;box-shadow:0 5px 9px -3px rgba(80,55,10,.45);z-index:1;background:url(/placeholders/kasavu.svg) repeat-x left center/480px 100%}
+.kz-kasavu::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,247,222,.85),transparent) no-repeat;background-size:28% 100%;background-position:-40% 0;-webkit-mask:url(/placeholders/kasavu.svg) repeat-x left center/480px 100%;mask:url(/placeholders/kasavu.svg) repeat-x left center/480px 100%;animation:kz-sheen 11s ease-in-out infinite 1.5s}
+/* bottom band casts its shadow upward */
+.kz-page>.kz-kasavu:last-child{box-shadow:0 -5px 9px -3px rgba(80,55,10,.45)}
 @keyframes kz-sheen{0%{background-position:-40% 0}30%{background-position:140% 0}100%{background-position:140% 0}}
 .kz-thread{stroke-dasharray:640;stroke-dashoffset:640;animation:kz-draw 3.2s cubic-bezier(.4,0,.2,1) .4s forwards}
 @keyframes kz-draw{to{stroke-dashoffset:0}}
