@@ -15,7 +15,7 @@ function Card({ href, label, n, alt, note, badge, mlword, name, tagline, chips, 
   return (
     <article className="kz-card">
       <a className="kz-img photo" href={href} aria-label={label}>
-        <img src={`/placeholders/p${n}.svg`} alt={alt} loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}placeholders/p${n}.svg`} alt={alt} loading="lazy" />
         <span className="kz-badge"><T en={badge[0]} ml={badge[1]} /></span>
         <span className="note">{note}</span>
       </a>
