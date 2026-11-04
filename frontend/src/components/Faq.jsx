@@ -2,9 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import seed from '../../../backend/data/faqs.seed.json'
 import { T, useLang } from '../lang'
 import { fetchFaqs, submitQuestion } from '../api'
-import { Header, Footer, Kasavu } from '../App.jsx'
-import Cloth from '../components/Cloth'
-import { Plus } from '../components/bits'
+import { Plus } from './bits'
 
 // Bundled copy of the published answers: this is what crawlers see in the
 // pre-rendered HTML, and what visitors see if the API can't be reached.
@@ -19,7 +17,7 @@ function Answers({ faqs, query, category }) {
   )
   useEffect(() => {
     const id = window.location.hash.replace('#', '')
-    const el = id && document.getElementById(id)
+    const el = id.startsWith('faq-') && document.getElementById(id)
     if (el && el.tagName === 'DETAILS') {
       el.open = true
       el.scrollIntoView({ block: 'center' })
@@ -113,7 +111,7 @@ function AskForm() {
   )
 }
 
-export default function FaqPage() {
+export default function FaqSection() {
   const [faqs, setFaqs] = useState(SEED_FAQS)
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
@@ -128,14 +126,11 @@ export default function FaqPage() {
   const categories = useMemo(() => [...new Set(faqs.map((f) => f.category))], [faqs])
 
   return (
-    <div className="kz-page">
-      <Cloth />
-      <Kasavu />
-      <Header />
-      <main className="faq wrap">
+    <>
+      <section id="questions" className="faq wrap" aria-labelledby="faq-title">
         <header className="faq-head">
           <p className="eyebrow faq-eyebrow"><T en="Questions" ml="ചോദ്യങ്ങൾ" /></p>
-          <h1 className="serif"><T en="Questions, answered." ml="ചോദ്യങ്ങൾ, ഉത്തരങ്ങൾ." /></h1>
+          <h2 id="faq-title" className="serif"><T en="Questions, answered." ml="ചോദ്യങ്ങൾ, ഉത്തരങ്ങൾ." /></h2>
           <p className="faq-sub"><T en="How a ritual begins, what it costs, how it is made and when it arrives." ml="ഒരു ചര്യ എങ്ങനെ തുടങ്ങുന്നു, എന്ത് ചെലവ്, എങ്ങനെ തയ്യാറാക്കുന്നു, എപ്പോൾ എത്തുന്നു." /></p>
         </header>
 
@@ -156,9 +151,7 @@ export default function FaqPage() {
 
         <Answers faqs={faqs} query={query} category={category} />
         <AskForm />
-      </main>
-      <Footer />
-      <Kasavu />
-    </div>
+      </section>
+    </>
   )
 }

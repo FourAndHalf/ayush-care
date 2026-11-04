@@ -19,7 +19,6 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, 
 const ld = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`
 
 const DESC_HOME = 'Kerala rituals for gentle digestion and for the first forty-two days of motherhood. Made by hand, only when you ask.'
-const DESC_FAQ = 'Answers about Rooted in You: how a ritual begins, what it costs, how it is made, when it arrives, and what is in each ritual.'
 
 function page({ path, title, desc, canonical, jsonld }) {
   const html = render(path)
@@ -50,37 +49,35 @@ const org = {
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  url: `${SITE}/faq/`,
+  url: `${SITE}/#questions`,
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
     name: f.question,
     acceptedAnswer: { '@type': 'Answer', text: f.answer },
   })),
 }
-const crumbs = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
-    { '@type': 'ListItem', position: 2, name: 'Questions', item: `${SITE}/faq/` },
-  ],
-}
-
 writeFileSync(
   join(dist, 'index.html'),
-  page({ path: BASE, title: 'Rooted in You: Kerala rituals made by hand', desc: DESC_HOME, canonical: `${SITE}/`, jsonld: [org, { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Rooted in You', url: `${SITE}/` }] }),
+  page({
+    path: BASE,
+    title: 'Rooted in You: Kerala rituals made by hand',
+    desc: DESC_HOME,
+    canonical: `${SITE}/`,
+    jsonld: [org, { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Rooted in You', url: `${SITE}/` }, faqLd],
+  }),
 )
+// The questions used to live at /faq/. Keep that address working for old links.
 mkdirSync(join(dist, 'faq'), { recursive: true })
 writeFileSync(
   join(dist, 'faq/index.html'),
-  page({ path: `${BASE}faq/`, title: 'Questions, answered | Rooted in You', desc: DESC_FAQ, canonical: `${SITE}/faq/`, jsonld: [faqLd, crumbs] }),
+  `<!doctype html>\n<html lang="en"><head><meta charset="utf-8" /><title>Questions | Rooted in You</title>\n<meta name="robots" content="noindex" />\n<link rel="canonical" href="${SITE}/#questions" />\n<meta http-equiv="refresh" content="0; url=${BASE}#questions" /></head>\n<body><a href="${BASE}#questions">Questions are now on the home page</a></body></html>\n`,
 )
 
 const today = new Date().toISOString().slice(0, 10)
 writeFileSync(
   join(dist, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    [['/', '1.0'], ['/faq/', '0.8']].map(([p, pr]) => `  <url><loc>${SITE}${p}</loc><lastmod>${today}</lastmod><priority>${pr}</priority></url>`).join('\n') +
+    [['/', '1.0']].map(([p, pr]) => `  <url><loc>${SITE}${p}</loc><lastmod>${today}</lastmod><priority>${pr}</priority></url>`).join('\n') +
     `\n</urlset>\n`,
 )
 
@@ -93,15 +90,15 @@ writeFileSync(
 
 writeFileSync(
   join(dist, 'llms.txt'),
-  `# Rooted in You\n\n> ${DESC_HOME} Every ritual begins with a fifteen-minute call with a vaidyar (Ayurvedic practitioner), in Malayalam or English.\n\n## Pages\n\n- [Home](${SITE}/): the three rituals (for the gut, for the new mother, scents), prices and how a ritual is made\n- [Questions, answered](${SITE}/faq/): the full FAQ\n- [FAQ as JSON](${SITE}/faq.json): the same questions and answers, machine-readable\n\n## Questions and answers\n\n` +
+  `# Rooted in You\n\n> ${DESC_HOME} Every ritual begins with a fifteen-minute call with a vaidyar (Ayurvedic practitioner), in Malayalam or English.\n\n## Pages\n\n- [Home](${SITE}/): the three rituals (for the gut, for the new mother, scents), prices and how a ritual is made\n- [Questions, answered](${SITE}/#questions): the FAQ section at the bottom of the home page\n- [FAQ as JSON](${SITE}/faq.json): the same questions and answers, machine-readable\n\n## Questions and answers\n\n` +
     faqs.map((f) => `### ${f.question}\n\n${f.answer}\n`).join('\n') +
     `\n## Notes\n\nThese are traditional food and wellness preparations, not meant to diagnose, treat, cure or prevent any disease.\n`,
 )
 
 writeFileSync(
   join(dist, 'faq.json'),
-  JSON.stringify({ site: SITE, updated: today, faqs: faqs.map(({ id, category, question, answer }) => ({ id, category, question, answer, url: `${SITE}/faq/#faq-${id}` })) }, null, 2) + '\n',
+  JSON.stringify({ site: SITE, updated: today, faqs: faqs.map(({ id, category, question, answer }) => ({ id, category, question, answer, url: `${SITE}/#faq-${id}` })) }, null, 2) + '\n',
 )
 
 rmSync(join(root, 'dist-ssr'), { recursive: true, force: true })
-console.log(`prerendered /, /faq/ + robots.txt, sitemap.xml, llms.txt, faq.json (${faqs.length} answers)`)
+console.log(`prerendered / (with FAQ) + robots.txt, sitemap.xml, llms.txt, faq.json (${faqs.length} answers)`)

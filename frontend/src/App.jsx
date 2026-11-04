@@ -3,7 +3,7 @@ import { Check, Photo, Plus, Stars } from './components/bits'
 import Carousel from './components/Carousel'
 import Rituals from './components/Rituals'
 import Cloth from './components/Cloth'
-import FaqPage from './pages/Faq'
+import FaqSection from './components/Faq'
 
 export const BASE = import.meta.env.BASE_URL
 
@@ -17,7 +17,7 @@ export function Header() {
       <nav className="kz-nav" aria-label="Main">
         <a href={`${BASE}#rituals`} className="kz-hide-sm"><T en="Rituals" ml="ചര്യകൾ" /></a>
         <a href={`${BASE}#made`} className="kz-hide-sm"><T en="How it's made" ml="തയ്യാറാക്കുന്ന വിധം" /></a>
-        <a href={`${BASE}faq/`} className="kz-hide-sm"><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
+        <a href={`${BASE}#questions`} className="kz-hide-sm"><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
         <div className="kz-lang" role="radiogroup" aria-label="Language">
           <button type="button" role="radio" aria-checked={lang === 'en'} onClick={() => setLang('en')}>EN</button>
           <button type="button" role="radio" aria-checked={lang === 'ml'} lang="ml" style={{ fontFamily: "'Manjari', sans-serif", letterSpacing: 0 }} onClick={() => setLang('ml')}>മലയാളം</button>
@@ -181,7 +181,7 @@ export function Footer() {
         <span><T en="Kerala, since 2026" ml="കേരളം, 2026 മുതൽ" /></span>
       </span>
       <span className="links">
-        <a href={`${BASE}faq/`}><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
+        <a href={`${BASE}#questions`}><T en="Questions" ml="ചോദ്യങ്ങൾ" /></a>
         <a href="#top">WhatsApp</a>
         <a href="#top">care@[domain]</a>
         <a href="#top"><T en="Lab reports" ml="ലാബ് റിപ്പോർട്ടുകൾ" /></a>
@@ -192,17 +192,7 @@ export function Footer() {
   )
 }
 
-export const isFaqPath = (path) => /\/faq\/?$/.test(path)
-
-export default function App({ path }) {
-  const here = path ?? (typeof window !== 'undefined' ? window.location.pathname : '/')
-  if (isFaqPath(here)) {
-    return (
-      <LangProvider>
-        <FaqPage />
-      </LangProvider>
-    )
-  }
+export default function App() {
   return (
     <LangProvider>
       <div className="kz-page">
@@ -217,6 +207,7 @@ export default function App({ path }) {
         <Words />
         <Vaidyar />
         <Close />
+        <FaqSection />
         <Footer />
         <Kasavu />
       </div>
